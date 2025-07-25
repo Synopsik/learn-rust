@@ -1,0 +1,54 @@
+[package]
+name = "chapter_3"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+[[bin]]
+name = "boolean"
+path = "src/boolean.rs"
+
+[[bin]]
+name = "arith_operations"
+path = "src/arith_operations.rs"
+
+[[bin]]
+name = "floating_point"
+path = "src/floating_point.rs"
+
+[[bin]]
+name = "shadowing"
+path = "src/shadowing.rs"
+
+[[bin]]
+name = "variables"
+path = "src/variables.rs"
+
+[[bin]]
+name = "char"
+path = "src/char.rs"
+
+[[bin]]
+name = "tuple"
+path = "src/tuple.rs"
+
+[[bin]]
+name = "array"
+path = "src/array.rs"
+
+[[bin]]
+name = "functions"
+path = "src/functions.rs"
+
+[[bin]]
+name = "branches"
+path = "src/branches.rs"
+
+[[bin]]
+name = "loops"
+path = "src/loops.rs"
