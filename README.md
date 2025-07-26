@@ -23,9 +23,9 @@ This book and repo assumes Rust version 1.62.0 or later
 * Chapter 19 Advanced Features
 * Chapter 20 Final Project: Building a Multithreaded Web Server
 
-## Notes
+# Notes
 
-### Chapter 1
+## Chapter 1
 Rust is amazing because it also installs all of its documentation for offline reading.
 Your language comes pre-built with a how-to book; how cool is that! Using `rustup doc`
 you can read *The Rust Programming Language* book, look up any types, functions, or anything else provided by the standard library.
@@ -42,7 +42,7 @@ and only confirms successful compilation.
 
 Releases need to be built longer for optimizations, to do this, use `cargo build --release`.
 
-### Chapter 2
+## Chapter 2
 Rust has a standard library imported into every program (std::io)
 these can be found at https://doc.rust-lang.org/std/prelude/index.html.
 
@@ -64,7 +64,7 @@ and the newline character created by pressing Enter. So if a user types `5` and 
 the result will look like `5\n`. This is why we need to use the .trim() command to remove any leading 
 or following whitespaces, `\n`, or `\r\n`.
 
-### Chapter 3
+## Chapter 3
 The compiler is able to evaluate a limited number of operations (expression) types at runtime. 
 
 For example: `const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;`
