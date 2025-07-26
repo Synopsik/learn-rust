@@ -61,7 +61,7 @@ so you can study the methods and functions for each package locally installed.
 
 When taking user input from the console, remember that the input is the keyboard strokes 
 and the newline character created by pressing Enter. So if a user types `5` and presses Enter,
-the result will look like `5\n`. This is why we need to use the .trim() command to remove any leading 
+the result will look like `5\n`. This is why we need to use the `.trim()` method to remove any leading 
 or following whitespaces, `\n`, or `\r\n`.
 
 ## Chapter 3
@@ -71,6 +71,8 @@ For example: `const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;`
 
 Even though we are declaring a constant variable, we can do it this way because it's made easier to write 
 3 hours times 60 minutes times 60 seconds in an expression compared to hardcoded as 10800 for the seconds.
+
+---
 
 We can use Shadowing to "mutate" an immutable variable by calling a new variable to replace it. 
 In doing this we can change the variable type:
@@ -108,7 +110,7 @@ The error says we cannot mutate the variable type.
 | Binary          | `0b1111_0000` |
 | Byte (u8 only)  | `b'A'`        |
 
-Formula to find amount, -(2<sup>n-1</sup>) to 2<sup>n-1</sup>-1 inclusive.
+### Formula to find amount, -(2<sup>n-1</sup>) to 2<sup>n-1</sup>-1 inclusive.
 
 When we are estimating an i8 for n we result with -(2<sup>7</sup>) to 2<sup>7</sup>-1 which equals -128 to 127.
 
@@ -119,6 +121,7 @@ For a u8 we can store from 0 to 2<sup>8</sup>-1, which equals 0 to 255.
 `isize` and `usize` depends on the architecture of the computer that the program is running on
 
 ---
+### Type sizes
 
 Booleans are one byte in size.
 
@@ -128,17 +131,21 @@ Arrays have a fixed length when created.
 
 ---
 
-Expressions alone do not include ending semicolons, 
+### Evaluating Expressions
+
+Expressions alone do not need to include ending semicolons (`;`), 
 ```
 let y = {
-    let x = 3; 
-    x + 1 // This expression doesn't require a semicolon
-}; // Though the statement still does
+    let x = 3; // Statement, semicolon
+    x + 1 // Expression, doesn't require a semicolon
+}; // Main Statement, semicolon
 ```
 it's only when paired with a statement that you need to close with a semicolon:
 `let x = x + 1;`
 
 ---
+
+### Loop Labels
 
 Loop labels can be used to break a specific loop at any point in the nested hierarchy.
 ```
