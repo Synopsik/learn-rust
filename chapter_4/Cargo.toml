@@ -4,3 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+
+[[bin]]
+name = "stack_vs_heap"
+path = "src/stack_vs_heap.rs"
