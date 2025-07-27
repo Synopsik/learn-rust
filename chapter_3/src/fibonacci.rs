@@ -23,6 +23,10 @@ fn find_fib(n: i64) -> i64 {
     // return a;
     //
     // Further optimization like memoization would speed up calculations
+    //
+    // Also it would be better if I stored the numbers in heap instead of on stack
+    // Dynamic allocation should eliminate overflow errors
+    //
     // Scientific notation once a number threshold is reached,
     // would help prevent integer overflow errors
 
