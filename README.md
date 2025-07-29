@@ -92,42 +92,71 @@ The error says we cannot mutate the variable type.
 ---
 
 #### Integer Types in Rust
-| Length  | Signed  | Unsigned |
-|---------|---------|----------|
-| 8-bit   | `i8`    | `u8`     |
-| 16-bit  | `i16`   | `u16`    |
-| 32-bit  | `i32`   | `u32`    |
-| 64-bit  | `i64`   | `u64`    |
-| 128-bit | `i128`  | `u128`   |
-| arch    | `isize` | `usize`  |
+| Length  | Signed  | Unsigned | Size         |
+|---------|---------|----------|--------------|
+| 8-bit   | `i8`    | `u8`     | 1 byte       |
+| 16-bit  | `i16`   | `u16`    | 2 bytes      |
+| 32-bit  | `i32`   | `u32`    | 4 bytes      |
+| 64-bit  | `i64`   | `u64`    | 8 bytes      |
+| 128-bit | `i128`  | `u128`   | 16 bytes     |
+| arch    | `isize` | `usize`  | 4 or 8 bytes |
+| 32-bit  | `f32`   | n/a      | 4 bytes      |
+| 64-bit  | `f64`   | n/a      | 8 bytes      |
 
-#### Integer Literals in Rust
-| Number literals | Example       |
-|-----------------|---------------|
-| Decimal         | `98_222`      |
-| Hex             | `0xff`        |
-| Octal           | `0o77`        |
-| Binary          | `0b1111_0000` |
-| Byte (u8 only)  | `b'A'`        |
+### Formula to find a data types **min to max** size, **-(2<sup>n-1</sup>) to 2<sup>n-1</sup>-1** inclusive.
 
-### Formula to find amount, -(2<sup>n-1</sup>) to 2<sup>n-1</sup>-1 inclusive.
+When we are estimating an **i8** for **n** we result with -(2<sup>**7**</sup>) to 2<sup>**7**</sup>-1 which equals **-128 to 127**.
 
-When we are estimating an i8 for n we result with -(2<sup>7</sup>) to 2<sup>7</sup>-1 which equals -128 to 127.
+*Unsigned variants* can store from **0 to 2<sup>**n**</sup>-1** inclusive.
 
-Unsigned variants can store from 0 to 2<sup>n</sup>-1 inclusive.
-
-For a u8 we can store from 0 to 2<sup>8</sup>-1, which equals 0 to 255.
+For a u8 we can store from 0 to 2<sup>**8**</sup>-1, which equals **0 to 255**.
 
 `isize` and `usize` depends on the architecture of the computer that the program is running on
 
----
-### Type sizes
+#### Other Types in Rust
+| Type | Size    |
+|------|---------|
+| Char | 4 bytes |
+| Bool | 1 byte  |
 
-Booleans are one byte in size.
+Arrays must have a fixed length when created.
+```
+let arr: [i32; 5] = [1, 2, 3, 4, 5];  // 20 bytes (5 × 4 bytes)
+let bytes: [u8; 10] = [0; 10];        // 10 bytes
+```
 
-Char is four bytes in size.
+#### Integer Literals in Rust
+| Number literals | Example       | Default Type | Size    |
+|-----------------|---------------|--------------|---------|
+| Decimal         | `98_222`      | i32          | 4 bytes |
+| Hex             | `0xff`        | i32          | 4 bytes |
+| Octal           | `0o77`        | i32          | 4 bytes |
+| Binary          | `0b1111_0000` | i32          | 4 bytes |
+| Byte (u8 only)  | `b'A'`        | u8           | 1 byte  |
 
-Arrays have a fixed length when created.
+#### Heap Allocated
+```
+let s: String = String::from("hello");  // 24 bytes on stack (ptr + len + capacity)
+                                        // + heap allocation for actual string data
+let str_ref: &str = "hello";            // 16 bytes (pointer + length)
+```
+
+### Pointer Sizes
+
+#### Regular Reference
+```
+let x = 42;
+let r: &i32 = &x;      // 8 bytes on 64-bit systems (just a pointer)
+let mr: &mut i32;      // 8 bytes on 64-bit systems
+```
+
+#### Fat Reference (DST Reference)
+```
+let s: &str = "hello";           // 16 bytes (8-byte pointer + 8-byte length)
+let slice: &[i32] = &[1, 2, 3];  // 16 bytes (8-byte pointer + 8-byte length)
+let obj: &dyn Display = &42;     // 16 bytes (8-byte pointer + 8-byte vtable pointer)
+```
+
 
 ---
 
@@ -169,3 +198,6 @@ for element in a {
 ```
 
 Therefore, ONLY use while loop you are absolutely uncertain how many iterations are needed
+
+## Chapter 4
+
