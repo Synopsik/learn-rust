@@ -5,7 +5,7 @@ This book and repo assumes Rust version 1.62.0 or later
 * ~~Chapter 1 Getting Started~~
 * ~~Chapter 2 Programming a Guessing Game~~
 * ~~Chapter 3 Common Programming concepts~~
-* Chapter 4 Understanding Ownership
+* ~~Chapter 4 Understanding Ownership~~
 * Chapter 5 Using Structs to Structure Related Data
 * Chapter 6 Enums and Pattern Matching
 * Chapter 7 Managing Growing Projects with Packages, Crates, and Modules
