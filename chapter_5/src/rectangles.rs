@@ -2,6 +2,7 @@ fn main() {
     first_example();
     tuple_example();
     struct_example();
+    struct_methods_example();
 }
 
 fn first_example() {
@@ -34,6 +35,23 @@ struct Rectangle {
     height: u32,
 }
 
+impl Rectangle {
+    fn area(&self) -> u32 {
+        // A struct method that calculates area for a Rectangle
+        self.width * self.height
+    }
+
+    fn width(&self) -> bool {
+        // Determines if width is greater than 0
+        self.width > 0
+    }
+
+    fn can_hold(&self, rect: &Rectangle) -> bool {
+        // Checks height AND width to determines sizes
+        rect.height < self.height && rect.width < self.width
+    }
+}
+
 fn struct_example() {
     let rect1 = Rectangle {
         width: 30,
@@ -49,5 +67,34 @@ fn struct_example() {
 
     println!("rect1 is {:?}", rect1); // Debug enabled to print structs
     println!("rect1 is {:#?}", rect1); // Nicer formatting
+
+    // Struct methods
+    println!("The area of the rectangle is: {}", rect1.area());
+
+    if rect1.width() {
+        println!(
+            "The rectangle has a nonzero width; it is {}",
+            rect1.width(),
+        );
+    }
+}
+
+fn struct_methods_example() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+
 }
 
