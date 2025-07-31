@@ -7,4 +7,16 @@ edition = "2024"
 
 [[bin]]
 name = "enums"
-path = "src/enums.rs"
+path = "src/main.rs"
+
+[[bin]]
+name = "message"
+path = "src/message.rs"
+
+[[bin]]
+name = "null"
+path = "src/null.rs"
+
+[[bin]]
+name = "coin_example"
+path = "src/coin_example.rs"
