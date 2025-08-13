@@ -292,7 +292,7 @@ let world = &s[6..12];
 ```
 
 Rust's range syntax allows us to drop the first value to begin with 0 or 
-the last value to conclude with the last index
+the last value to end with the last index
 
 
 The slices in each example are equal:
