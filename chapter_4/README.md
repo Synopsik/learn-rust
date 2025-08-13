@@ -290,3 +290,25 @@ let s = String::from("Hello world!);
 let hello = &s[0..5];
 let world = &s[6..12];
 ```
+
+Rust's range syntax allows us to drop the first value to begin with 0 or 
+the last value to conclude with the last index
+
+
+The slices in each example are equal:
+
+```
+let s = String::from("hello");
+
+// Both of these are the same
+let slice = &s[0..2];
+let slice = &s[..2];
+
+let len = s.len();
+
+// All three of these are the same
+let slice = &s[0..len];
+let slice = &s[0..];
+let slice = &s[..]
+```
+
