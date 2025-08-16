@@ -199,3 +199,27 @@ rect1 is Rectangle {
 
 ---
 
+## Method Syntax
+
+To define the method in the context of Rectangle, we start an `impl` (implementation) block.
+Everything within this `impl` block is associated with the Rectangle type.
+Inside the block we can create functions, but we must always use self as the first parameter.
+
+```
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+```
+
+We use ***method syntax*** to call our area method
+
+```
+rect1.area()
+```
+
+We can also name our method after one of our struct's fields.
+This way when we follow `rect1.width` with parentheses `()` Rust knows we mean the method `width`.
+When we don't use parentheses, Rust knows we mean the field `width`.
+    
