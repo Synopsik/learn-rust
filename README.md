@@ -6,7 +6,7 @@ This book and repo assumes Rust version 1.62.0 or later
 * ~~[Chapter 2 Programming a Guessing Game](https://github.com/Synopsik/learn-rust/tree/master/chapter_2#chapter-2-programming-a-guessing-game)~~
 * ~~[Chapter 3 Common Programming concepts](https://github.com/Synopsik/learn-rust/tree/master/chapter_3#chapter-3-common-programming-concepts)~~
 * ~~[Chapter 4 Understanding Ownership](https://github.com/Synopsik/learn-rust/tree/master/chapter_4#chapter-4-understanding-ownership)~~
-* Chapter 5 Using Structs to Structure Related Data
+* ~~[Chapter 5 Using Structs to Structure Related Data](https://github.com/Synopsik/learn-rust/tree/master/chapter_5#chapter-5-using-structs-to-structure-related-data)~~
 * Chapter 6 Enums and Pattern Matching
 * Chapter 7 Managing Growing Projects with Packages, Crates, and Modules
 * Chapter 8 Common Collections
