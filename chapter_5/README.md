@@ -223,3 +223,61 @@ We can also name our method after one of our struct's fields.
 This way when we follow `rect1.width` with parentheses `()` Rust knows we mean the method `width`.
 When we don't use parentheses, Rust knows we mean the field `width`.
     
+### Method Parameters
+
+Methods can take multiple parameters that you add to the signature after the self-parameter.
+
+```
+fn can_hold(&self, other: &Rectangle) -> bool {
+    self.width > other.width && self.height > other.height
+}
+```
+
+## Associated Functions
+
+**Associated Functions** don't have ***self*** as their first parameter.
+These are often used for constructors that will return a new instance of the struct.
+`new` is NOT a special name and isn't built into the language. 
+In another example, 
+we could also create a square function that uses one dimension parameter for both `width` and `height`.
+
+```
+impl Rectangle {
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
+}
+```
+
+The `Self` key words in the return type and in the body of the function are aliases for the type that appears after the
+`impl` keyword, which in this case is `Rectangle`.
+
+To call the associated function, we use the `::` syntax with the struct name:
+
+```
+let sq = Rectangle::square(3);
+```
+
+## Multiple `impl` Blocks
+
+Each struct can have multiple `impl` blocks.
+
+```
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+impl Rectangle {
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+}
+```
+
+There's no reason to separate these methods into multiple `impl` blocks here, but this is valid syntax.
+
