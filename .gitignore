@@ -1,5 +1,4 @@
 # Project exclude paths
-/chapter_3/target/
 /.idea/.gitignore
 /.idea/discord.xml
 /.idea/encodings.xml
