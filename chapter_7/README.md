@@ -103,7 +103,7 @@ and where the managers complete admin duties.
 Administrators (our program) can interact with both public and private tools,
 while clients can only interact with the public tools.
 
-```rust
+```
 mod front_of_house {
     mod hosting {
         fn add_to_waitlist() {}
@@ -142,13 +142,13 @@ To call a function, we need to know its path. A path can take two forms:
 
 ### ***absolute path***
 An *absolute path* is the full path starting from a crate root.
-```rust
+```
 crate::front_of_house::hosting::add_to_waitlist();
 ```
 
 ### ***relative path***
 A *relative path* starts from the current module and uses `self`, `super`, or an identifier in the ***current module***.
-```rust
+```
 front_of_house::hosting::add_to_waitlist();
 ```
 
@@ -163,7 +163,7 @@ This, however, is not enough to access our function.
 We have made the container (module) public, but the contents are still private and hidden.
 We must add the `pub` keyword to any public functions, as well as the parent module (container).
 
-```rust
+```
 mod front_of_house { // Private module (container) named: front_of_house
     pub mod hosting { // Public module named: hosting
         pub fn add_to_waitlist() {} // Public function named: add_to_waitlist()
