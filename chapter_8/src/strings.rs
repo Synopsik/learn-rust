@@ -1,0 +1,87 @@
+pub fn run_examples() {
+    creating_new_string();
+    updating_a_string();
+    concatenation();    
+    indexing_into_strings();
+    slicing_strings();
+    methods_for_iterating();
+}
+
+fn creating_new_string() {
+    println!("Creating A String");
+    let mut s = String::new();
+    
+    let data = "initial contents";
+    
+    let s = data.to_string();
+    println!("s = '{0}'", &s);
+    
+    // The method also works on a literal directly:
+    let s = "initial contents".to_string();
+}
+
+fn updating_a_string() {
+    println!("\nUpdating a String");
+    let mut s = String::from("foo");
+    println!("s = '{0}'", &s);
+    s.push_str("bar");
+    println!("s = '{0}'", &s);
+    
+    // Using our string slice after appending it to a String
+    let mut s1 = String::from("foo");
+    let s2 = "bar"; // Give s2 ownership of string slice "bar"
+    s1.push_str(s2);
+    println!("s2 is {s2}");
+    
+    // Adding a single char to a String using the push method
+    let mut s = String::from("lo");
+    s.push('l');
+    println!("s = '{0}'", &s);
+}
+
+fn concatenation() {
+    println!("\nConcatenation");
+    // Concatenation using the + operator
+    let s1 = String::from("Hello, ");
+    println!("s1 = '{0}'", s1);
+    let s2 = String::from("world!");
+    let s3 = s1 + &s2; // Ownership of s1 transfers to s3, only take ref of s2
+    println!(
+        "s2 = '{0}'\ns3 = '{1}'",
+        &s2, &s3
+    );
+    
+    //  We can use the format! macro for string interpolation
+    let s1 = String::from("tic");
+    let s2 = String::from("tac");
+    let s3 = String::from("toe");
+    // The format! macro uses references, this call doesn't take ownership of any parameters
+    let s = format!("{s1}-{s2}-{s3}");
+    println!("s = {s}")
+}
+
+fn indexing_into_strings() {
+    println!("\nIndexing: Sucker you can't!");
+}
+
+fn slicing_strings() {
+    println!("\nSlicing Strings");
+    let hello = "Здравствуйте";
+    println!("hello = {hello}");
+    let s = &hello[0..4];
+    println!("s = {s}");
+}
+
+fn methods_for_iterating() {
+    println!("\nMethods for Iterating Over Strings");
+    println!("\nIterating over characters in the string");
+    let x = "Зд";
+    for c in x.chars() {
+        println!("{c}");
+    }
+    
+    println!("\nIterating over bytes in the string");
+    for b in x.bytes() {
+        println!("{b}");
+    }
+}
