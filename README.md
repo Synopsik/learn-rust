@@ -9,7 +9,7 @@ This book and repo assumes Rust version 1.62.0 or later
 * ~~[Chapter 5 Using Structs to Structure Related Data](https://github.com/Synopsik/learn-rust/tree/master/chapter_5#chapter-5-using-structs-to-structure-related-data)~~
 * ~~[Chapter 6 Enums and Pattern Matching](https://github.com/Synopsik/learn-rust/tree/master/chapter_6#chapter-6-enums-and-pattern-matching)~~
 * ~~[Chapter 7 Managing Growing Projects with Packages, Crates, and Modules](https://github.com/Synopsik/learn-rust/tree/master/chapter_7#chapter-7-managing-growing-projects-with-packages,-crates,-and-modules)~~
-* ~~[Chapter 8 Common Collections](https://github.com/Synopsik/learn-rust/tree/master/chapter_7#chapter-7-common-collections)~~
+* ~~[Chapter 8 Common Collections](https://github.com/Synopsik/learn-rust/tree/master/chapter_8#chapter-8-common-collections)~~
 * Chapter 9 Error Handling
 * Chapter 10 Generic Types, Traits, and Lifetimes
 * Chapter 11 Writing Automated Tests
