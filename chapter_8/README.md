@@ -305,3 +305,140 @@ The best way to operate on pieces of strings is to be explicit about whether you
   180
   ```
 **It's important to remember that valid Unicode scalar values may be made up of more than one byte.**
+
+## Hash maps
+The type `HashMap<K, V>` stores a mapping of keys of type `K` to values of type `V` using a *hashing function*,
+which determines how it places these keys and values into memory.
+
+A key can be of any type.
+
+In our example, each key is a team's name and the values are each team's score.   
+Given a team name, you can retrieve its score.
+
+### Creating a New Hash Map
+Let's create an empty hash map using `new` and then add elements with `insert`:
+```
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+```
+> [!NOTE]
+> Remember to first `use` the `HashMap` from the collection portion of the standard library.
+> `use std::collections::HashMap;`
+
+Hash maps have less support from the standard library; there's no built-in macro to construct them, for example.
+
+Hash maps store their data on the **heap**.
+This `HashMap` has keys of type `String` and values of type `i32`.
+Like vectors, hash maps are homogeneous:
+all the keys must have the same type, and all the values must have the same type.
+
+### Accessing Values in a Hash Map
+We can get a **value** out of the *hash map* by providing its **key** to the `get` method:
+```
+let team_name = String::from("Blue");
+let score = scores.get(&team_name).copied().unwrap_or(0);
+```
+`score` will have the **value** that's associated with the Blue Team and the result will be 10.
+The `get` method returns an `Option<&V>`; if there's no value for that key in the hash map `get` will return `None`.
+
+This program handles the `Option` by calling `copied` to get an `Option<i32>` rather than an `Option<&i32>`,
+then `unwrap_or` to set `score` to zero if `scores` doesn't have an entry for the **key**.
+
+We iterate over each **key-value pair** in a hash map in a similar manner as we do with vectors, using a `for` loop:
+```
+for (key, value) in &scores {
+  println!("{key}: {value}");
+}
+```
+This code will print each pair in an **arbitrary order**
+
+### Hash Maps and Ownership
+#### Ownership stack vs. heap:
+* `i32` 
+  * `Copy` - Values that implement the `Copy` trait are copied into the hash map.
+* `String`
+  * For owned values - they are moved, and the hash map will be the owner of those values. 
+
+If we insert **references** to values into the hash map, the values won't be moved into the hash map.
+The values that the references point to must be valid for at least as long as the hash map is valid.
+
+### Updating a Hash Map
+Although the number of key and value pairs is growable, 
+each unique key can only have one value associated with it at a time.
+
+When you want to change data in a hash map, 
+you have to decide how to handle the case when a key already has a value assigned: 
+* You could replace the old value with the new value, completely disregarding the old value. 
+* You could keep the old value and ignore the new value, only adding the new value if the key *doesn't* already have a value. 
+* Or you could combine the old value and the new value.
+
+#### Overwriting a Value
+If we insert a key and a value into a hash map and then insert that same key with a different value, 
+the value associated with that key will be replaced. Even if `insert` is called twice, the hash map will only contain
+one key-value pair because we're inserting the value for the Blue team's key both times.
+```
+let mut scores = HashMap::new();
+
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Blue"), 25); // Duplicate hash key
+```
+
+#### Adding a Key and Value Only If a Key Isn't Present
+A common action is to check whether a particular key already exists in the hash map with a value 
+and then take the following actions:
+* If the key does exist in the hash map, the existing value should remain the way it is
+* If the key doesn't exist, insert it and a value for it
+
+Hash maps have a special API for this called `entry` that takes the key you want to check as a parameter.
+The return value of the `entry` method is an enum called `Entry` that represents a value that might or might not exist.
+
+Let's say we want to check whether the key for the Yellow team has a value associated with it.
+If it doesn't, we want to insert the value 50, and the same for the Blue team:
+```
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+
+scores.entry(String::from("Yellow")).or_insert(50);
+scores.entry(String::from("Blue")).or_insert(50); // Existing entries fail silently
+```
+The `or_insert` method on `entry` is defined to return a mutable reference to the value for the corresponding Entry key 
+if that key exists, and if not, it inserts the parameter as the new value for this key and returns a mutable reference
+to the new value.
+
+The first call to `entry` will insert the key for the Yellow team with value 50 because there isn't a value yet.
+The second call to `entry` will not change the hash map because the Blue team already has value 10.
+
+### Updating a Value Based on the Old Value
+Another common use case for hash maps is to look up a key's value and then update it based on the old value.
+In this example, we use a hash map with the words as keys and increment the value to keep track of how many times we've 
+seen that word. If it's the first time we've seen a word, we'll first insert the value 0.
+```
+let text = "hello world wonderful world wonderful world";
+    
+let mut map = HashMap::new();
+
+for word in text.split_whitespace() {
+    let count = map.entry(word).or_insert(0);
+    *count += 1;
+}
+
+println!("{:?}", map);
+```
+When printing map key-value pairs, the iteration picks keys arbitrarily.
+
+* `split_whitespace` method: returns an iterator over subslices, separated by whitespace, of the value in text.  
+* `or_insert` method: returns a mutable reference `&mut V` to the value for the specified key.
+  * We store that mutable reference in the `count` var.
+* To assign new values, we must first dereference `count` using the asterisk `*`.
+  * The mutable reference goes out of scope at the end of the `for` loop.~~~~
+  * All these changes are safe and allowed by the borrowing rules.
+
+### Hashing Functions
+By default, `HashMap` usees a hashing function called *SipHash* that can provide resistance to denail-of-service (DoS)
+attacks involving hash tables. If you profile your code and find that the default hash function is too slow for your
+purposes, you can switch to another function by specifying a different hasher.
+
+A *hasher* is a type that implements the `BuildHasher` trait.
