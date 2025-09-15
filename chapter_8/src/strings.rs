@@ -2,6 +2,9 @@ pub fn run_examples() {
     creating_new_string();
     updating_a_string();
     concatenation();    
+    indexing_into_strings();
+    slicing_strings();
+    methods_for_iterating();
 }
 
 fn creating_new_string() {
@@ -55,4 +58,30 @@ fn concatenation() {
     // The format! macro uses references, this call doesn't take ownership of any parameters
     let s = format!("{s1}-{s2}-{s3}");
     println!("s = {s}")
+}
+
+fn indexing_into_strings() {
+    println!("\nIndexing: Sucker you can't!");
+}
+
+fn slicing_strings() {
+    println!("\nSlicing Strings");
+    let hello = "Здравствуйте";
+    println!("hello = {hello}");
+    let s = &hello[0..4];
+    println!("s = {s}");
+}
+
+fn methods_for_iterating() {
+    println!("\nMethods for Iterating Over Strings");
+    println!("\nIterating over characters in the string");
+    let x = "Зд";
+    for c in x.chars() {
+        println!("{c}");
+    }
+    
+    println!("\nIterating over bytes in the string");
+    for b in x.bytes() {
+        println!("{b}");
+    }
 }
