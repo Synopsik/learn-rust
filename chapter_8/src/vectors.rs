@@ -1,6 +1,9 @@
 pub fn run_examples() {
     values_with_vectors();
     reading_elements_of_vectors();
+    iterating_over_vector();
+    enums_store_multiple_types();
+    println!();
 }
 
 fn values_with_vectors() {
@@ -57,5 +60,45 @@ fn reading_elements_of_vectors() {
         // Remove the following comment to examine this common error
         // println!("The first element is: {first}");
     }
-    
+}
+
+fn iterating_over_vector() {
+    { 
+        // Using for loog to get immutable references to each element in a vector
+        let v = vec![100, 32, 57];
+        println!("\nIterating over immutable references:");
+        for i in &v {
+            println!("{i}");
+        }
+    }
+    {
+        // We can also iterate over mutable references to each element,
+        // making changes to all the elements.
+        let mut v = vec![100, 32, 57];
+        println!("\nIterating operations over mutable references:");
+        println!("Before: {:?}", v);
+        for i in &mut v {
+            *i += 50; // Dereference Operator * used to get the value of i, before we can use +=
+        }
+        println!("After adding 50: {:?}", v);
+    }
+}
+
+fn enums_store_multiple_types() {
+    #[derive(Debug)]
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+    ];
+
+    println!("\nSpreadsheet Cells Enum:");
+    row.iter().for_each(|x| println!("{:?}", x));
+
 }
