@@ -1,17 +1,4 @@
 # Project exclude paths
-/.idea/.gitignore
-/.idea/discord.xml
-/.idea/encodings.xml
-/.idea/learn-rust.iml
-/.idea/material_theme_project_new.xml
-/.idea/modules.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/vcs.xml
-/chapter_2/target/
-/chapter_3/target/
-/chapter_4/target/
-/chapter_5/target/
-/chapter_6/target/
-/chapter_7/target/
-/chapter_8/target/
-/chapter_12/minigrep/target/
+/.idea/
+/chapter_*/target/
+/chapter_*/*/target/
