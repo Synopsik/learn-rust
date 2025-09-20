@@ -13,7 +13,7 @@ This book and repo assumes Rust version 1.62.0 or later
 * ~~[Chapter 9 Error Handling](https://github.com/Synopsik/learn-rust/tree/master/chapter_9#chapter-9-error-handling)~~
 * Chapter 10 Generic Types, Traits, and Lifetimes
 * Chapter 11 Writing Automated Tests~~~~
-* ~~[Chapter 12 An I/O Project: Building a Command Line Program](https://github.com/Synopsik/learn-rust/tree/master/chapter_12/chapter_12/minigrep#chapter-12-an-io-project-building-a-command-line-program)~~
+* ~~[Chapter 12 An I/O Project: Building a Command Line Program](https://github.com/Synopsik/learn-rust/tree/master/chapter_12/#chapter-12-an-io-project-building-a-command-line-program)~~
 * Chapter 13 Functional Language Features: Iterators and Closures
 * Chapter 14 More About Cargo and Crates.io
 * Chapter 15 Smart Pointers
