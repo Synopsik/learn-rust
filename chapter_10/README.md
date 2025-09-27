@@ -279,3 +279,93 @@ impl Summary for Tweet {
 }
 ```
 
+After `impl`, we put the trait name we want to implement, then use the `for` keyword, and then specify the name of the 
+type we want to implement the trait for. Within the `impl` block, we put the method signatures that the trait 
+definition had defined previously.
+
+Now that the library has implemented the `Summary` trait on `NewsArticle` and `Tweet`, users of the crate can call the 
+trait methods on instances of `NewsArticle` and `Tweet` in the same way we call regular methods. The only difference
+is that the user must bring the trait into scope as well as the types.
+
+```
+fn main() {
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    };
+        
+    let article = NewsArticle {
+        headline: String::from("Penguins win the Stanley Cup Championship!"),
+        location: String::from("Pittsburgh, PA, USA"),
+        author: String::from("Iceburgh"),
+        content: String::from(
+            "The Pittsburgh Penguins once again are the best hockey team in the NHL",
+        ),
+    };
+    
+    println!("1 new tweet: {}", tweet.summarize());
+    println!("New article available! {}", article.summarize());
+}
+```
+
+Other crates that depend on the `aggregator` create can also bring the `Summary` trait into scope to implement `Summary`
+on their own types.
+
+```
+use aggregator::{Summary, Tweet};
+```
+
+> [!Note]
+> One restriction to note is that we can implement a trait on a type only if either the trait or the type, or both, are
+> local to our crate. For example, we can implement standard library traits like `Display` on a custom type like `Tweet`
+> as part of our `aggregator` create functionality because the type `Tweet` is local to our `aggregator` crate. We can
+> also implement `Summary` on `Vec<T>` in our `aggregator` create because the trait `Summary` is local to our
+> aggregator crate.
+
+But we can't implement external traits on external types. For example, we can't implement the `Display` trait on 
+`Vec<T>` within our `aggregator` create because `Display` and `Vec<T>` are both defined in the standard library and 
+aren't local to our aggregator crate.
+
+This restriction is part of a property called **coherence**, and more specifically the ***orphan rule***, so named
+because the parent type is not present. This rule ensures that other people's code can't break your code and vice
+versa. Without the rule, two crates could implement the same trait for the same type, and Rust wouldn't know which
+implementation to use.
+
+### Default Implementations
+
+Sometimes we may want to have default behavior for some or all of the methods in a trait instead of requiring
+implementations for all methods on every type. Then, after we implement the trait on a particular type, 
+we can keep or override each method's default behavior.
+
+```
+pub trait Summary {
+    fn summarize(&self) -> String {
+        String::from("(Read more...)");
+    }
+}
+```
+
+Even though we're no longer defining the `summarize` method on `NewsArticle` directly, we've provided a **default 
+implementation** and specified that `NewsArticle` implements the `Summary` trait. 
+
+```
+let article = NewsArticle {
+    headline: String::from("Penguins win the Stanley Cup Championship!"),
+    location: String::from("Pittsburgh, PA, USA"),
+    author: String::from("Iceburgh"),
+    content: String::from(
+        "The Pittsburgh Penguins once again are the best hockey team in the NHL."
+    ),
+};
+
+println!("New article available! {}", article.summarize());
+
+// Prints: New article available! (Read more...)
+```
+
+
+
