@@ -2,8 +2,7 @@
 This book and repo assumes Rust version **1.62.0** or later
 
 #### Finished Reading: October 5, 2025
-#### Finished Notes: TBD
-#### Finished Code: TBD
+#### Finished Notes/Code: TBD
 
 ## Progress
 * ~~[Chapter 1 Getting Started](https://github.com/Synopsik/learn-rust/tree/master/chapter_01#chapter-1-getting-started)~~
