@@ -1,6 +1,9 @@
 # Chapter 10: Generic Types, Traits, and Lifetimes
 
-## In Function Definitions
+## Generic Types
+
+### In Function Definitions
+
 Generics allow us to replace specific types with a placeholder that represents multiple types to remove code 
 duplication. We use generics to create definitions for items like functions, signatures, or structs, which we can then
 use with many different concrete data types.
@@ -42,7 +45,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 }
 ```
 
-## In Struct Definitions
+### In Struct Definitions
 
 We can also define structs to use a generic type parameter in one or more fields using the `<>` syntax.
 
@@ -80,7 +83,7 @@ fn main() {
 You can use as many generic type parameters in a definition as you want, 
 but using more than a few makes your code hard to read.
 
-## In Enum Definitions
+### In Enum Definitions
 
 We can define enums to hold generic data types in their variants.
 
@@ -110,7 +113,7 @@ The `Result` enum is generic over two types, `T` and `E`, and has two variants:
 
 This makes it convenient to use the `Result` enum anywhere we have an operation that might succeed.
 
-## In Method Definitions
+### In Method Definitions
 
 In the same way we can implement methods on structs and enums we can use generic types in their definitions too.
 The code below shows a method named `x` implemented on the `Point<T>` struct.
@@ -179,7 +182,7 @@ fn main() {
 }
 ```
 
-## Performance of Code Using Generics
+### Performance of Code Using Generics
 
 Generic types won't make your program run any slower than it would with concrete types.
 
@@ -367,5 +370,133 @@ println!("New article available! {}", article.summarize());
 // Prints: New article available! (Read more...)
 ```
 
+Default implementations can call other methods in the same trait, even if those other methods don't have a default 
+implementation. A trait can provide a lot of useful functionality and only require implementations to specify a small 
+part of it. For example, we could define the `Summary` trait to have a `summarize_author` method whose implementation
+in required, and then define a `summarize` method that has a default implementation that calls the `summarize_author`
+method.
 
+```
+pub trait Summary {
+    fn summarize_author(&self) -> String;
+    
+    fn summarize(&self) -> String {
+        format!(
+            "(Read more from {}...)",
+            self.summarize_author()
+        )
+    }
+}
+```
 
+To use this version of `Sumamry`, we only need to define `summarize_author` when we implement the trait on a type.
+
+```
+impl Summary for Tweet {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
+    }
+}
+```
+
+Because we've implemented `summarize_author`, the `Summary` trait has given us the behavior of the `summarize` method
+without requiring us to write any more code.
+
+### Traits as Parameters
+
+We can use traits to define functions that accept many different types. We'll use the `Summary` trait we implemented on 
+the `NewsArticle` and `Tweet` types previously to define a notify function that calls the `summarize` method on its 
+`item` parameter, which is of some types that implements the `Summary` trait.
+
+```
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+We specify the `impl` keyword and the trait name. This parameter accepts any type that implements the specified trait.
+In the body of `notify`, we can call any methods on `item` that come from the `Summary` trait, such as `summarize`.
+Code that calls the function with any other type, such as a `String` or an `i32`, won't compile because those types 
+don't implement `Summary`.
+
+### Trait Bound Syntax
+
+The `impl` Trait is appropriate if we want this function to allow `item1` and `item2` to have different types. But if
+want to force both parameters to have the same type, we must use a ***trait bound***:
+
+```
+pub fn notify<T: Summary>(item1: &T, item2: &T) {
+    ...
+}
+```
+
+The generic type `T` specified as the type of the `item1` and `item2` parameters constraints the function such that the
+concrete type of the value passed must be the same.
+
+### Multiple Trait Bound Using + Syntax
+
+We can also chain more than one trait bound. Say we wanted `notify` to use display formatting as well as `summarize`
+on `item`. We specify in the `notify` definition that `item` must implement both `Display` and `Summary`. We can do 
+this using the `+` syntax:
+
+```
+fn notify(item: &(impl Summary + Display)) { ... }
+
+// The + syntax is also valid with trait bound
+
+fn notify<T: Summary + Display>(item: &T) { ... }
+```
+
+The body of `notify` can now call `summarize` and use `{}` to format items.
+
+### `where` Clause
+
+Rust has an alternate syntax for when we begin to specify too many trait bounds:
+
+```
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{
+    ...
+}
+```
+
+This makes our function's signature less cluttered and clear to read.
+
+### Returning Types that Implement Traits
+
+We can use the `impl Trait` syntax in the return position to return a value of some type that must implement a trait:
+
+```
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people",
+        reply: false,
+        retweet: false,
+    }
+}
+```
+
+We are specifying that the function returns some type that implements the `Summary` trait without naming the concrete 
+type. The function actually returns a `Tweet`, but the code calling this function doesn't need to know that.
+
+However, you can only use `impl Trait` if you're returning a single type. For example, this code that could potentially
+return either a `NewsArticle` or a `Tweet` with the return type specified as `impl Summary` would work:
+
+```
+fn returns_summarizable(switch: bool) -> impl Summary {
+    if switch {
+        NewsArticle { ... }
+    } else {
+        Tweet { ... }
+    }
+}
+/* !!!ERROR!!! */
+```
+
+### Trait Bounds to Conditionally Implement Methods
+
+pg. 200

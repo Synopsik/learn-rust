@@ -121,6 +121,20 @@ fn implementing_traits() {
     println!("1 new tweet: {}", tweet.summarize());
     
     println!("New article available! {}", article.summarize());
+    
+    notify(&tweet);    
 }
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+/* 
+Trait Bound Syntax without syntax sugar:
+
+pub fn notify<T: Summary>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+*/
 
 
