@@ -11,7 +11,7 @@ pub fn run_all() {
 }
 
 fn try_open_file() {
-    let greeting_file_result = File::open("hello.txt");
+    let greeting_file_result = File::open("../hello.txt");
     
     let greeting_file = match greeting_file_result {
         Ok(file) => file, // When File::open succeeds, Ok() is a valid instance
@@ -22,14 +22,14 @@ fn try_open_file() {
 }
 
 fn matching_multiple_errors() {
-    let greeting_file_result = File::open("hello.txt");
+    let greeting_file_result = File::open("../hello.txt");
 
     let greeting_file = match greeting_file_result {
         Ok(file) => file,
         Err(error) => match error.kind() {
             // We can match on any ErrorKind:: type for controlled error handling
             ErrorKind::NotFound => { 
-                match File::create("hello.txt") {
+                match File::create("../hello.txt") {
                     // Since this may fail, we need some err handling
                     Ok(fc) => fc,
                     Err(e) => panic!(
@@ -48,9 +48,9 @@ fn matching_multiple_errors() {
 }
 
 fn matching_shortcuts() {
-    let greeting_file = File::open("hello.txt").unwrap();
+    let greeting_file = File::open("../hello.txt").unwrap();
     
-    let greeting_file_2 = File::open("hello.txt")
+    let greeting_file_2 = File::open("../hello.txt")
         .expect("hello.txt should be included in this project");
 }
 
@@ -61,7 +61,7 @@ fn propagating_errors() {
 }
 
 fn read_username_from_file() -> Result<String, io::Error> {
-    let username_file_result = File::open("hello.txt");
+    let username_file_result = File::open("../hello.txt");
 
     let mut username_file = match username_file_result {
         Ok(file) => file,
@@ -91,7 +91,7 @@ fn new_operator() {
 }
 
 fn updated_read_username_from_file() -> Result<String, io::Error> {
-    let mut username_file = File::open("hello.txt")?;
+    let mut username_file = File::open("../hello.txt")?;
     let mut username = String::new();
     username_file.read_to_string(&mut username)?;
     Ok(username)
@@ -99,13 +99,13 @@ fn updated_read_username_from_file() -> Result<String, io::Error> {
 
 fn shorter_read_username_from_file() -> Result<String, io::Error> {
     let mut username = String::new();
-    File::open("hello.txt")?.read_to_string(&mut username)?;
+    File::open("../hello.txt")?.read_to_string(&mut username)?;
     Ok(username)
 }
 
 fn standard_read_username_from_file() -> Result<String, io::Error> {
     // Common operation so std provides convenience functions to do all the work
-    fs::read_to_string("hello.txt")
+    fs::read_to_string("../hello.txt")
 }
 
 fn last_char_of_first_line(text: &str) -> Option<char> {
