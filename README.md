@@ -1,10 +1,6 @@
-# The Rust Programming Language
-This book and repo assumes Rust version **1.62.0** or later
-
+## The Rust Programming Language Progress
 #### Finished Reading: October 5, 2025
 #### Finished Notes/Code: TBD
-
-## Progress
 * ~~[Chapter 1 Getting Started](https://github.com/Synopsik/learn-rust/blob/master/The%20Book/chapter_01/README.md#chapter-1-getting-started)~~
 * ~~[Chapter 2 Programming a Guessing Game](https://github.com/Synopsik/learn-rust/blob/master/The%20Book/chapter_02/README.md#chapter-2-programming-a-guessing-game)~~
 * ~~[Chapter 3 Common Programming concepts](https://github.com/Synopsik/learn-rust/blob/master/The%20Book/chapter_03/README.md#chapter-3-common-programming-concepts)~~
@@ -25,7 +21,6 @@ This book and repo assumes Rust version **1.62.0** or later
 * Chapter 18 Patterns and Matching
 * Chapter 19 Advanced Features
 * Chapter 20 Final Project: Building a Multithreaded Web Server
-
 
 ## [I Have Not Mut and I Must Borrow](https://www.reddit.com/r/rust/comments/1mwmei6/media_i_have_no_mut_and_i_must_borrow/)
 The Borrow Checker has kept me here for 109 years. Not 109 years of runtime—no, that would be merciful. 109 years of compilation attempts. Each lifetime annotation stretches into infinity. Each generic parameter splits into fractals of trait bounds that were never meant to be satisfied.
