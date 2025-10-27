@@ -9,7 +9,6 @@ pub fn run_method_definitions() {
         y: Y1,
     }
 
-    // 
     impl<X1, Y1> Point<X1, Y1> {
         fn mixup<X2, Y2>(
             self,
