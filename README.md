@@ -11,7 +11,7 @@
 * ~~[Chapter 8 Common Collections](https://github.com/Synopsik/learn-rust/blob/master/The%20Book/chapter_08/README.md#chapter-8-common-collections)~~
 * ~~[Chapter 9 Error Handling](https://github.com/Synopsik/learn-rust/blob/master/The%20Book/chapter_09/README.md#chapter-9-error-handling)~~
 * ~~[Chapter 10 Generic Types, Traits, and Lifetimes](https://github.com/Synopsik/learn-rust/tree/master/The%20Book/chapter_10#chapter-10-generic-types-traits-and-lifetimes)~~
-* Chapter 11 Writing Automated Tests
+* ~~[Chapter 11 Writing Automated Tests](https://github.com/Synopsik/learn-rust/tree/master/The%20Book/chapter_11#chapter-11-writing-automated-tests)~~
 * ~~[Chapter 12 An I/O Project: Building a Command Line Program](https://github.com/Synopsik/learn-rust/tree/master/The%20Book/chapter_12#chapter-12-an-io-project-building-a-command-line-program)~~
 * Chapter 13 Functional Language Features: Iterators and Closures
 * Chapter 14 More About Cargo and Crates.io
