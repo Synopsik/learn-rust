@@ -568,7 +568,7 @@ fn main() {
 }
 ```
 
-> [!Error]
+> [!WARNING]
 > This code won't compile because the value that `r` is referring to has gone out of scope before we try to use it. 
 >
 > Inside the inner scope, we attempt to set the value of `r` as a reference to `x`.
@@ -603,7 +603,7 @@ fn longest(x: &str, y: &str) -> &str {
 }
 ```
 
-> [!Error]
+> [!WARNING]
 > The function return type needs a generic lifetime parameter on it because Rust can't tell whether the reference being 
 > returned refers to `x` or `y`.
 
@@ -694,7 +694,7 @@ fn longest<'a>(x: &str, y: &str) -> &'a str {
     result.as_str()
 }
 ```
-> [!error]
+> [!WARNING]
 > Even though we've specified a lifetime parameter `'a` for the return type, this implementation will fail to compile 
 > because the return value lifetime is not related to the lifetime of the parameters at all.
  
