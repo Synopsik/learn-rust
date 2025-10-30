@@ -1,4 +1,5 @@
 # Project exclude paths
 /.idea/
-/chapter_*/target
+/The Book/chapter_*/target
+/The Book/chapter_12/minigrep/target
 /Programming Rust/chapter_*/target
