@@ -3,3 +3,5 @@
 /The Book/chapter_*/target
 /The Book/chapter_12/minigrep/target
 /Programming Rust/chapter_*/target
+/Programming Rust/chapter_*/hello/target
+/Programming Rust/chapter_*/actix-gcd/target
