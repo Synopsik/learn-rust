@@ -1,3 +1,5 @@
+use chapter_13::run_all;
+
 fn main() {
-    println!("Hello, world!");
+    run_all()
 }
