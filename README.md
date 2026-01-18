@@ -22,10 +22,10 @@
 
 # Programming Rust
 
-* [Chapter 1 Systems Programmers Can Have Nice Things](https://github.com/Synopsik/learn-rust/tree/master/Programming%20Rust/chapter_01#chapter-1-systems-programmers-can-have-nice-things)
-* [Chapter 2 A Tour of Rust](https://github.com/Synopsik/learn-rust/tree/master/Programming%20Rust/chapter_02#chapter-2-a-tour-of-rust)
-* Chapter 3 Fundamental Types
-* Chapter 4 Ownership and Moves
+* [Chapter 1 Systems Programmers Can Have Nice Things](https://github.com/Synopsik/learn-rust/blob/master/Programming%20Rust/chapter_01)
+* [Chapter 2 A Tour of Rust](https://github.com/Synopsik/learn-rust/blob/master/Programming%20Rust/chapter_02)
+* [Chapter 3 Fundamental Types](https://github.com/Synopsik/learn-rust/blob/master/Programming%20Rust/chapter_03)
+* [Chapter 4 Ownership and Moves](https://github.com/Synopsik/learn-rust/blob/master/Programming%20Rust/chapter_04)
 * Chapter 5 References
 * Chapter 6 Expressions
 * Chapter 7 Error Handling
